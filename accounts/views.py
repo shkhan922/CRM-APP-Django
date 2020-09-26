@@ -115,6 +115,27 @@ def products(request):
 
 	return render(request, 'accounts/products.html', {'products':products})
 
+
+@login_required(login_url='login')
+#@allowed_users(allowed_roles=['admin'])
+def create_customer(request):
+	form = OrderForm()
+	if request.method == 'POST':
+		try:
+			param = request.POST
+			param = param.dict()
+			param['customer_id'] = int(param['customer_id'])
+			obj = Order(**param)
+			obj.save()
+		except:
+			return HttpResponse("error")
+		return HttpResponse('success')
+	customers = list(Customer.objects.all().values())
+	products = list(Product.objects.all().values())
+	context = {'form': form, 'status': Order.STATUS_L, 'customers': customers, 'products': products,
+			   'units': Order.UNITS}
+	return render(request, 'accounts/create_customer.html', context)
+
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
 def customer(request, pk_test):
@@ -132,6 +153,27 @@ def customer(request, pk_test):
 
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
+def createOrder(request):
+	form = OrderForm()
+	if request.method == 'POST':
+		try:
+			param = request.POST
+			param = param.dict()
+			param['customer_id'] = int(param['customer_id'])
+			obj = Order(**param)
+			obj.save()
+		except:
+			return HttpResponse("error")
+		return HttpResponse('success')
+	customers = list(Customer.objects.all().values())
+	products = list(Product.objects.all().values())
+	context = {'form': form, 'status': Order.STATUS_L, 'customers': customers, 'products': products,
+			   'units': Order.UNITS}
+	return render(request, 'accounts/order_form.html', context)
+
+
+
+'''
 def createOrder(request, pk):
 	OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10 )
 	customer = Customer.objects.get(id=pk)
@@ -147,7 +189,7 @@ def createOrder(request, pk):
 
 	context = {'form':formset}
 	return render(request, 'accounts/order_form.html', context)
-
+'''
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
 def updateOrder(request, pk):

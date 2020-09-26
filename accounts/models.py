@@ -43,15 +43,31 @@ class Order(models.Model):
 			('Out for delivery', 'Out for delivery'),
 			('Delivered', 'Delivered'),
 			)
-
-	customer = models.ForeignKey(Customer, null=True, on_delete= models.SET_NULL)
-	product = models.ForeignKey(Product, null=True, on_delete= models.SET_NULL)
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
+	STATUS_L = [
+		'Pending', 'Out for delivery', 'Delivered'
+	]
+	UNITS = [
+		{"name": "Ton", 'val': 1000},
+		{"name": "Kg", 'val': 1}
+	]
+	order_name = models.CharField(max_length=200, null=True)
+	order_no = models.CharField(max_length=200, null=True)
+	company_name = models.CharField(max_length=200, null=True)
+	tel_phone = models.CharField(max_length=200, null=True)
+	address = models.CharField(max_length=200, null=True)
+	contact = models.CharField(max_length=200, null=True)
+	product = models.CharField(max_length=200, null=True)
+	price = models.CharField(max_length=200, null=True)
+	qty = models.CharField(max_length=200, null=True)
+	discount = models.CharField(max_length=200, null=True)
 	status = models.CharField(max_length=200, null=True, choices=STATUS)
-	note = models.CharField(max_length=1000, null=True)
+	#customer = models.ForeignKey(Customer, on_delete= models.SET_NULL, null=True)
+	customer_id = models.IntegerField(blank=True, default=0)
+	date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
 
 	def __str__(self):
-		return self.product.name
+		return str(self.order_name)
 
 
 

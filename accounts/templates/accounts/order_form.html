@@ -1,4 +1,4 @@
-{% extends 'accounts/main_template.html' %}
+{% extends 'accounts/main.html' %}
 {% load static %}
 {% block content %}
 {% load widget_tweaks %}
@@ -20,8 +20,9 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-3">
-                                <span>ORDER NAME</span>
-                                <input type="text" name="order_name" maxlength="200" class="form-control" required="" id="id_order_name">
+                                <div class="w3-light-grey">
+                                    <div class="w3-container w3-green w3-center" style="width:25%">Lead </div>
+                                  </div><br>
                             </div>
                             <div class="col-6"></div>
                             <div class="col-3">
@@ -35,6 +36,10 @@
                         </div>
                         <div class="row">
                             <div class="col-3">
+                                <span>DATE</span>
+                                <input type="text" name="order_no" maxlength="200" class="form-control" required="" id="id_order_no">
+                            </div>
+                            <div class="col-3">
                                 <span>ORDER NO</span>
                                 <input type="text" name="order_no" maxlength="200" class="form-control" required="" id="id_order_no">
                             </div>
@@ -46,8 +51,36 @@
                                 <span>TELEPHONE</span>
                                 <input type="text" name="tel_phone" maxlength="200" class="form-control" required="" id="id_tel_phone">
                             </div>
-                            <div class="col-3">
+                            <div class="col-12">
                                 <span>ADDRESS</span>
+    
+                            </div>
+                            <div class="col-3">
+                                <span>STREET</span>
+                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                            </div>
+                            <div class="col-3">
+                                <span>CITY</span>
+                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                            </div>
+                            <div class="col-3">
+                                <span>MUNCIPALITY</span>
+                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                            </div>
+                            <div class="col-3">
+                                <span>STATE</span>
+                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                            </div>
+                            <div class="col-3">
+                                <span>COUNTRY</span>
+                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                            </div>
+                            <div class="col-3">
+                                <span>P.O BOX NO.</span>
+                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                            </div>
+                            <div class="col-3">
+                                <span>POST OFFICE</span>
                                 <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
                             </div>
                         </div>
