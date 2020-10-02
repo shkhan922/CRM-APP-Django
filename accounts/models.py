@@ -28,6 +28,8 @@ class Product(models.Model):
 			) 
 
 	name = models.CharField(max_length=200, null=True)
+	brand = models.CharField(max_length=200, null=True)
+	code = models.CharField(max_length=200, null=True)
 	price = models.FloatField(null=True)
 	category = models.CharField(max_length=200, null=True, choices=CATEGORY)
 	description = models.CharField(max_length=200, null=True, blank=True)
@@ -50,11 +52,17 @@ class Order(models.Model):
 		{"name": "Ton", 'val': 1000},
 		{"name": "Kg", 'val': 1}
 	]
-	order_name = models.CharField(max_length=200, null=True)
+	Date = models.DateField()
 	order_no = models.CharField(max_length=200, null=True)
 	company_name = models.CharField(max_length=200, null=True)
 	tel_phone = models.CharField(max_length=200, null=True)
-	address = models.CharField(max_length=200, null=True)
+	street = models.CharField(max_length=200, null=True)
+	city = models.CharField(max_length=200, null=True)
+	muncipality = models.CharField(max_length=200, null=True)
+	state = models.CharField(max_length=200, null=True)
+	country = models.CharField(max_length=200, null=True)
+	poboxno = models.CharField(max_length=200, null=True)
+	postoffice = models.CharField(max_length=200, null=True)
 	contact = models.CharField(max_length=200, null=True)
 	product = models.CharField(max_length=200, null=True)
 	price = models.CharField(max_length=200, null=True)

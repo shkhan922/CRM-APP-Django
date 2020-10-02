@@ -24,14 +24,7 @@
                            
                         </div>
                         <div class="row">
-                            <div class="col-3">
-                                <span>DATE</span>
-                                <input type="text" name="order_no" maxlength="200" class="form-control" required="" id="id_order_no">
-                            </div>
-                            <div class="col-3">
-                                <span>ORDER NO</span>
-                                <input type="text" name="order_no" maxlength="200" class="form-control" required="" id="id_order_no">
-                            </div>
+                            
                             <div class="col-3">
                                 <span>COMPANY NAME</span>
                                 <input type="text" name="company_name" maxlength="200" class="form-control" required="" id="id_company_name">
@@ -40,95 +33,58 @@
                                 <span>TELEPHONE</span>
                                 <input type="text" name="tel_phone" maxlength="200" class="form-control" required="" id="id_tel_phone">
                             </div>
+                            <div class="col-3">
+                                <span>EMAIL</span>
+                                <input type="text" name="email" maxlength="200" class="form-control" required="" id="id_tel_phone">
+                            </div>
                             <div class="col-12">
                                 <span>ADDRESS</span>
     
                             </div>
                             <div class="col-3">
                                 <span>STREET</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="street" maxlength="200" class="form-control" required="" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>CITY</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="city" maxlength="200" class="form-control" required="" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>MUNCIPALITY</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="muncipality" maxlength="200" class="form-control" required="" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>STATE</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="state" maxlength="200" class="form-control" required="" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>COUNTRY</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="country" maxlength="200" class="form-control" required="" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>P.O BOX NO.</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="pobox" maxlength="200" class="form-control" required="" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>POST OFFICE</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="post-office" maxlength="200" class="form-control" required="" id="id_address">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-3"></div>
                             <div class="col-3">
-                                <span>CUSTOMER NAME</span>
-                                <select name="customer" class="form-control" required="" id="id_customer">
-                                    {% for item in customers %}
-                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                    {% endfor %}
-                                </select>
+                                <span>CONTACT PERSON NAME</span>
+                                 <input type="text" name="contact-person">
+                                    
+        
                             </div>
                             <div class="col-3">
-                                <span>CONTACT NUMBER</span>
+                                <span>MOBILE NUMBER</span>
                                 <input type="text" name="contact" maxlength="200" class="form-control" required="" id="id_contact">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12" style="margin-top: 5px;margin-bottom: 5px">
-                                <span style="margin-right: 15px">PRODUCT</span><button style="" type="button" class="btn btn-info" onclick="onclick_add_product()">+Add new item</button>
-                            </div>
-                            <div class="col-12">
-                            <table width="100%">
-                                <thead>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Code</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th>Unit</th>
-                                    <th>Discount</th>
-                                    <th>Total</th>
-                                    <th>Action</th>
-                                </thead>
-                                <tbody id="multi_product"></tbody>
-                            </table></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-9"></div>
-                            <div class="col-3">
-                                <span>Total:</span>
-                                <span id="totalv">0</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-9"></div>
-                            <div class="col-3">
-                            <span>Vat 5%:</span>
-                            <span id="gvat">0</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-9"></div>
-                            <div class="col-3">
-                            <span>Ground Total:</span>
-                            <span id="gtotalv">0</span>
-                            </div>
-                        </div>
+                          
 
                         <hr>
                         <button type="button" class="btn btn-info" onclick="onclick_add_order()">Add</button>

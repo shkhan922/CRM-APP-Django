@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-3">
                                 <span>DATE</span>
-                                <input type="text" name="order_no" maxlength="200" class="form-control" required="" id="id_order_no">
+                                <input type="text" name="date" maxlength="200" class="form-control" required="" id="id_date">
                             </div>
                             <div class="col-3">
                                 <span>ORDER NO</span>
@@ -106,12 +106,15 @@
                             <div class="col-12">
                             <table width="100%">
                                 <thead>
-                                    <th>Name</th>
+                                    <th>S.No</th>
+                                    <th>Description</th>
                                     <th>Brand</th>
                                     <th>Code</th>
-                                    <th>Price</th>
                                     <th>Qty</th>
+                                   
+                                   <th> Tons</th>
                                     <th>Unit</th>
+                                    <th>Price</th>
                                     <th>Discount</th>
                                     <th>Total</th>
                                     <th>Action</th>
@@ -136,10 +139,56 @@
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
+                            <span>Transportaion Charge</span>
+                            <span id="transcharge">0</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9"></div>
+                            <div class="col-3">
                             <span>Ground Total:</span>
                             <span id="gtotalv">0</span>
                             </div>
                         </div>
+                        <div class="row">
+                            
+                            <div class="col-3">
+                            <span>Payment Terms</span>
+                            <span id="gtotalv">0</span>
+                            </div>
+                            
+                        
+                            
+                            <div class="col-3">
+                            <span>Collection Terms</span>
+                            <span id="gtotalv">0</span>
+                            </div>
+
+                            
+                            <div class="col-3">
+                            <span>Deliver to </span>
+                            <span id="gtotalv">0</span>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class="col-12">
+                                <span> Delivery :</span><span> After __ No. Of days</span>
+                                </div>
+
+                        </div>
+                        <div class='row'>
+                            <div class="col-12">
+                                <textarea rows="4" cols="50" name="comment" form="usrform"></textarea>
+                            </div>
+                        </div>
+
+                        <div class='row'>
+                            <div class="col-12">
+                                UserName (Sales Person): <input type="text" name="usrname">
+                            </div>
+                        </div>
+                        
+                
 
                         <hr>
                         <button type="button" class="btn btn-info" onclick="onclick_add_order()">Add</button>
