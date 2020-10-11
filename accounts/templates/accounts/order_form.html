@@ -64,31 +64,31 @@
                             </div>
                             <div class="col-3">
                                 <span>STREET</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="street" maxlength="200" class="form-control" required="" id="street">
                             </div>
                             <div class="col-3">
                                 <span>CITY</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="city" maxlength="200" class="form-control" required="" id="city">
                             </div>
                             <div class="col-3">
                                 <span>MUNCIPALITY</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="munciplaity" maxlength="200" class="form-control" required="" id="muncipality">
                             </div>
                             <div class="col-3">
                                 <span>STATE</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="state" maxlength="200" class="form-control" required="" id="state">
                             </div>
                             <div class="col-3">
                                 <span>COUNTRY</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="country" maxlength="200" class="form-control" required="" id="country">
                             </div>
                             <div class="col-3">
                                 <span>P.O BOX NO.</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="poboxno" maxlength="200" class="form-control" required="" id="poboxno">
                             </div>
                             <div class="col-3">
                                 <span>POST OFFICE</span>
-                                <input type="text" name="address" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="postoffice" maxlength="200" class="form-control" required="" id="postoffice">
                             </div>
                         </div>
                         <div class="row">
@@ -394,6 +394,20 @@
                 }
                 else{
                     jQuery('#id_tel_phone').val((res.customer.telephone ? res.customer.telephone : ''))
+                    jQuery('#street').val((res.customer.street ? res.customer.street : ''))
+                    jQuery('#city').val((res.customer.city ? res.customer.city : ''))
+                    jQuery('#muncipality').val((res.customer.muncipality ? res.customer.muncipality : ''))
+                    jQuery('#state').val((res.customer.state ? res.customer.state : ''))
+                    jQuery('#country').val((res.customer.country ? res.customer.country : ''))
+                    jQuery('#poboxno').val((res.customer.poboxno ? res.customer.poboxno : ''))
+                    jQuery('#postoffice').val((res.customer.postoffice ? res.customer.postoffice : ''))
+                   
+                    
+                    
+
+                    
+
+
                 }
             }
         })
