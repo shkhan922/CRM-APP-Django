@@ -18,6 +18,7 @@ from .decorators import unauthenticated_user, allowed_users, admin_only
 
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
+import sys
 
 @unauthenticated_user
 def registerPage(request):
@@ -125,30 +126,40 @@ def create_customer(request):
 	form = CustomerForm()
 	if request.method == 'POST':
 		form = CustomerForm(request.POST)
-		
 		param = request.POST
 		contactPersonNames = param.getlist("contact_person_name[]")
 		contactPersonMobiles = param.getlist("contact_person_mobile[]")
 		param = param.dict()	
 		
-		if form.is_valid():
-			user = form.save()
+		try:
+			if form.is_valid():
+				print("contactPersonNames", contactPersonNames)
+				print("contactPersonMobiles", contactPersonMobiles)
+				user = form.save()
 
-			rows = min([len(contactPersonNames), len(contactPersonMobiles)])
-			for i in range(0, rows):
-				contactPerson = CustomerContactPerson(
-					# id=None, 
-					name=contactPersonNames[i], 
-					mobile=contactPersonMobiles[i],
+				rows = min([len(contactPersonNames), len(contactPersonMobiles)])
+				print("rows", rows)
+				for i in range(0, rows):
+					contactPerson = CustomerContactPerson(
+						# id=None, 
+						name=contactPersonNames[i], 
+						mobile=contactPersonMobiles[i],
 
-					customer=form
-				)
-				contactPerson.save()
+						customer=user
+					)
+					print("contactPerson", contactPerson)
+					contactPerson.save()
 
-			company_name = form.cleaned_data.get('company_name')
-			messages.success(request, 'Account was created for ' + company_name)
+				company_name = form.cleaned_data.get('company_name')
+				messages.success(request, 'Account was created for ' + company_name)
 
-			return redirect('/')
+				return redirect('/')
+			else:
+				print("Errors", form.errors)
+				
+		except Exception as error:
+			print("An exception was thrown!")
+			print(error)
 		
 	context = {'form':form}
 	return render(request, 'accounts/create_customer.html', context)

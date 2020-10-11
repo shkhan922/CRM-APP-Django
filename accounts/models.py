@@ -15,10 +15,6 @@ class Customer(models.Model):
 	country = models.CharField(max_length=200, null=True)
 	poboxno = models.CharField(max_length=200, null=True)
 	postoffice = models.CharField(max_length=200, null=True)
-	contact_person1= models.CharField(max_length=200, null=True)
-	mobile1= models.CharField(max_length=200, null=True)
-	contact_person2= models.CharField(max_length=200, null=True)
-	mobile2= models.CharField(max_length=200, null=True)
 
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 
