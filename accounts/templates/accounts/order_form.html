@@ -124,9 +124,8 @@
                                     <th>Description</th>
                                     <th>Brand</th>
                                     <th>Code</th>
-                                    <th>Qty</th>
-                                   
-                                   <th> Tons</th>
+                                    <th>Qty</th>                                   
+                                    <th> Tons</th>
                                     <th>Unit</th>
                                     <th>Price</th>
                                     <th>Discount</th>
@@ -136,6 +135,7 @@
                                 <tbody id="multi_product"></tbody>
                             </table></div>
                         </div>
+                        <p>&nbsp;<br/></p>
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
@@ -234,7 +234,7 @@
     {% endfor %}
 
     function onclick_add_product(){
-        var i = $("#multi_product")[0].childNodes.length;
+        var i = ($("#multi_product").children().length) + 1;
 
         var htm = '';
         htm += '<tr id="product_tr_' + i + '">';
@@ -245,6 +245,10 @@
             productname_htm += '<option value="'+ products[k].id +'">' + products[k].name + '</option>';
         }
         productname_htm += '</select>';
+
+        htm += '<td>';
+        htm += '' + i + '';
+        htm += '</td>';
 
         htm += '<td>';
         htm += productname_htm;
@@ -283,6 +287,10 @@
 
         htm += '<td>';
         htm += '<span class="pd_row__fill-weki form-control td_mg" id="total_' + i +'">' + 0 +'</span>';
+        htm += '</td>';
+
+        htm += '<td>';
+        htm += '<span class="pd_row__fill-weki form-control td_mg" id="total_' + i +'"></span>';
         htm += '</td>';
 
         htm += '<td>';
@@ -378,9 +386,15 @@
         })
     }
     function onclick_delete_row(row_id){
-        $('#product_tr_' + row_id).css('display', 'none');
+        $('#product_tr_' + row_id).remove();
+        reset_index();
     }
 
+    function reset_index(){
+        $('#multi_product tr').each(function(i) {
+            $(this).find("td:first").html(i + 1);
+        });
+    }
 
     function onCompanySelect(){
         $.ajax({

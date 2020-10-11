@@ -18,97 +18,130 @@
 			<form action="" method="POST">
             	{% csrf_token %}
                     <div class="col-12">
-                        <div class="row">
-                            
-                            </div>
-                           
+                        <div class="row"></div>                           
+                    </div>
+                    <div class="row">                        
+                        <div class="col-3">
+                            <span>COMPANY NAME</span>
+                            <input type="text" name="company_name" maxlength="200" class="form-control" required="" id="id_company_name">
                         </div>
-                        <div class="row">
-                            
-                            <div class="col-3">
-                                <span>COMPANY NAME</span>
-                                <input type="text" name="company_name" maxlength="200" class="form-control" required="" id="id_company_name">
-                            </div>
-                            <div class="col-3">
-                                <span>TELEPHONE</span>
-                                <input type="text" name="telephone" maxlength="200" class="form-control"  id="id_tel_phone">
-                            </div>
-                            <div class="col-3">
-                                <span>EMAIL</span>
-                                <input type="text" name="email" maxlength="200" class="form-control"  id="id_tel_phone">
-                            </div>
-                            <div class="col-12">
-                                <span>ADDRESS</span>
-    
-                            </div>
-                            <div class="col-3">
-                                <span>STREET</span>
-                                <input type="text" name="street" maxlength="200" class="form-control" id="id_address">
-                            </div>
-                            <div class="col-3">
-                                <span>CITY</span>
-                                <input type="text" name="city" maxlength="200" class="form-control" id="id_address">
-                            </div>
-                            <div class="col-3">
-                                <span>MUNCIPALITY</span>
-                                <input type="text" name="muncipality" maxlength="200" class="form-control" id="id_address">
-                            </div>
-                            <div class="col-3">
-                                <span>STATE</span>
-                                <input type="text" name="state" maxlength="200" class="form-control"  id="id_address">
-                            </div>
-                            <div class="col-3">
-                                <span>COUNTRY</span>
-                                <input type="text" name="country" maxlength="200" class="form-control" id="id_address">
-                            </div>
-                            <div class="col-3">
-                                <span>P.O BOX NO.</span>
-                                <input type="text" name="poboxno" maxlength="200" class="form-control" id="id_address">
-                            </div>
-                            <div class="col-3">
-                                <span>POST OFFICE</span>
-                                <input type="text" name="postoffice" maxlength="200" class="form-control" id="id_address">
-                            </div>
+                        <div class="col-3">
+                            <span>TELEPHONE</span>
+                            <input type="text" name="telephone" maxlength="200" class="form-control"  id="id_tel_phone">
                         </div>
-                        <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-3">
-                                <span>CONTACT PERSON NAME</span>
-                                 <input type="text" name="contact_person1">
-                                    
-        
-                            </div>
-                            <div class="col-3">
-                                <span>MOBILE NUMBER</span>
-                                <input type="text" name="mobile1" maxlength="200" class="form-control" id="id_contact">
-                            </div>
+                        <div class="col-3">
+                            <span>EMAIL</span>
+                            <input type="text" name="email" maxlength="200" class="form-control"  id="id_tel_phone">
                         </div>
-                        <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-3">
-                                <span>CONTACT PERSON NAME</span>
-                                 <input type="text" name="contact_person2">
-                                    
-        
-                            </div>
-                            <div class="col-3">
-                                <span>MOBILE NUMBER</span>
-                                <input type="text" name="mobile2" maxlength="200" class="form-control"  id="id_contact">
-                            </div>
+                        <div class="col-12">
+                            <span>ADDRESS</span>
                         </div>
-                        <div class="row">
-                          
-
-                        <hr>
-                        <!-- <button type="button" class="btn btn-info" onclick="onclick_add_order()">Add</button> -->
-                        <div class="btn btn-info d-flex justify-content-center mt-3 login_container">
-                            <input class="btn login_btn" type="submit" value="Add">
-                          </div>
+                        <div class="col-3">
+                            <span>STREET</span>
+                            <input type="text" name="street" maxlength="200" class="form-control" id="id_address">
+                        </div>
+                        <div class="col-3">
+                            <span>CITY</span>
+                            <input type="text" name="city" maxlength="200" class="form-control" id="id_address">
+                        </div>
+                        <div class="col-3">
+                            <span>MUNCIPALITY</span>
+                            <input type="text" name="muncipality" maxlength="200" class="form-control" id="id_address">
+                        </div>
+                        <div class="col-3">
+                            <span>STATE</span>
+                            <input type="text" name="state" maxlength="200" class="form-control"  id="id_address">
+                        </div>
+                        <div class="col-3">
+                            <span>COUNTRY</span>
+                            <input type="text" name="country" maxlength="200" class="form-control" id="id_address">
+                        </div>
+                        <div class="col-3">
+                            <span>P.O BOX NO.</span>
+                            <input type="text" name="poboxno" maxlength="200" class="form-control" id="id_address">
+                        </div>
+                        <div class="col-3">
+                            <span>POST OFFICE</span>
+                            <input type="text" name="postoffice" maxlength="200" class="form-control" id="id_address">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <p>&nbsp;<br/></p>
+                        <div class="col-12">
+                            <div style="margin-top: 5px;margin-bottom: 5px">
+                                <span style="margin-right: 15px"><b>Contact Persons</b></span>
+                                <button type="button" class="btn btn-info" onclick="onclick_add_contact()">+Add new item</button>
+                            </div>
+                            <table width="100%">
+                                <thead>
+                                    <th>S. No.</th>
+                                    <th>Name</th>
+                                    <th>Mobile</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody id="contact_persons">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="contact_person_name[]" required>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="contact_person_mobile[]" class="form-control" required>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="btn btn-info justify-content-center mt-3">
+                            <input class="btn btn btn-info" type="submit" value="Add">
+                        </div>
                     </div>
 			</form>
 		</div>
 	</div>
-
 </div>
+
+<script>
+    function onclick_add_contact(){
+        var i = ($("#contact_persons").children().length) + 1;
+
+        var htm = '';
+        htm += '<tr id="contact_tr_' + i + '">';
+
+        htm += '<td>';
+        htm += '' + i + '';
+        htm += '</td>';
+
+        htm += '<td>';
+        htm += '<input type="text" class="form-control" name="contact_person_name[]" required>';
+        htm += '</td>';
+
+        htm += '<td>';
+        htm += '<input type="text" name="contact_person_mobile[]" class="form-control" required>';
+        htm += '</td>';
+        
+        htm += '<td>';
+        htm += '<button type="button" class="btn btn-info" onclick="onclick_delete_row('+ i +')">Delete</button>';
+        htm += '</td>';
+
+        htm += '</tr>';
+
+        $("#contact_persons").append(htm);
+    }
+
+    function onclick_delete_row(row_id){
+        $('#contact_tr_' + row_id).remove();
+        reset_index();
+    }
+
+    function reset_index(){
+        $('#contact_persons tr').each(function(i) {
+            $(this).find("td:first").html(i + 1);
+        });
+    }
+</script>
 
 {% endblock %}

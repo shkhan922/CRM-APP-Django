@@ -121,38 +121,35 @@ def products(request):
 
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
-def create_customer(request):
-	# form = CustomerForm()
-	# if request.method == 'POST':
-	# 	print('fdsdf')
-	# 	try:
-	# 		param = request.POST
-	# 		param = param.dict()
-	# 		param['customer_id'] = int(param['customer_id'])
-	# 		obj = Order(**param)
-	# 		obj.save()
-	# 	except:			
-	# 		return HttpResponse("error")
-	# 	return HttpResponse('success')
-	# customers = list(Customer.objects.all().values())
-	# products = list(Product.objects.all().values())
-	# context = {'form': form, 'status': Order.STATUS_L, 'customers': customers, 'products': products,
-	# 		   'units': Order.UNITS}
-	# return render(request, 'accounts/create_customer.html', context)
-
+def create_customer(request):	
 	form = CustomerForm()
 	if request.method == 'POST':
 		form = CustomerForm(request.POST)
+		
+		param = request.POST
+		contactPersonNames = param.getlist("contact_person_name[]")
+		contactPersonMobiles = param.getlist("contact_person_mobile[]")
+		param = param.dict()	
+		
 		if form.is_valid():
 			user = form.save()
-			# username = form.cleaned_data.get('username')
 
+			rows = min([len(contactPersonNames), len(contactPersonMobiles)])
+			for i in range(0, rows):
+				contactPerson = CustomerContactPerson(
+					# id=None, 
+					name=contactPersonNames[i], 
+					mobile=contactPersonMobiles[i],
 
-			messages.success(request, 'Account was created for')
+					customer=form
+				)
+				contactPerson.save()
+
+			company_name = form.cleaned_data.get('company_name')
+			messages.success(request, 'Account was created for ' + company_name)
 
 			return redirect('/')
 		
-
 	context = {'form':form}
 	return render(request, 'accounts/create_customer.html', context)
 

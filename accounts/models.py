@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Customer(models.Model):
-	# user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-
 	company_name = models.CharField(max_length=200, null=True)
 	telephone = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200, null=True)
@@ -28,6 +26,18 @@ class Customer(models.Model):
 		return self.company_name
 
 
+class CustomerContactPerson(models.Model):
+	
+	name = models.CharField(max_length=200, null=True)
+	mobile = models.CharField(max_length=20, null=True)
+	date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.name
+
+
 class Tag(models.Model):
 	name = models.CharField(max_length=200, null=True)
 
@@ -36,9 +46,9 @@ class Tag(models.Model):
 
 class Product(models.Model):
 	CATEGORY = (
-			('Indoor', 'Indoor'),
-			('Out Door', 'Out Door'),
-			) 
+		('Indoor', 'Indoor'),
+		('Out Door', 'Out Door'),
+	) 
 
 	name = models.CharField(max_length=200, null=True)
 	brand = models.CharField(max_length=200, null=True)
@@ -85,7 +95,6 @@ class Order(models.Model):
 	#customer = models.ForeignKey(Customer, on_delete= models.SET_NULL, null=True)
 	customer_id = models.IntegerField(blank=True, default=0)
 	date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-
 
 	def __str__(self):
 		return str(self.order_name)
