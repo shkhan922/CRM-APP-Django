@@ -16,6 +16,9 @@ from .forms import OrderForm, CreateUserForm, CustomerForm
 from .filters import OrderFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
+
 @unauthenticated_user
 def registerPage(request):
 
@@ -119,21 +122,38 @@ def products(request):
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
 def create_customer(request):
-	form = OrderForm()
+	# form = CustomerForm()
+	# if request.method == 'POST':
+	# 	print('fdsdf')
+	# 	try:
+	# 		param = request.POST
+	# 		param = param.dict()
+	# 		param['customer_id'] = int(param['customer_id'])
+	# 		obj = Order(**param)
+	# 		obj.save()
+	# 	except:			
+	# 		return HttpResponse("error")
+	# 	return HttpResponse('success')
+	# customers = list(Customer.objects.all().values())
+	# products = list(Product.objects.all().values())
+	# context = {'form': form, 'status': Order.STATUS_L, 'customers': customers, 'products': products,
+	# 		   'units': Order.UNITS}
+	# return render(request, 'accounts/create_customer.html', context)
+
+	form = CustomerForm()
 	if request.method == 'POST':
-		try:
-			param = request.POST
-			param = param.dict()
-			param['customer_id'] = int(param['customer_id'])
-			obj = Order(**param)
-			obj.save()
-		except:
-			return HttpResponse("error")
-		return HttpResponse('success')
-	customers = list(Customer.objects.all().values())
-	products = list(Product.objects.all().values())
-	context = {'form': form, 'status': Order.STATUS_L, 'customers': customers, 'products': products,
-			   'units': Order.UNITS}
+		form = CustomerForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			# username = form.cleaned_data.get('username')
+
+
+			messages.success(request, 'Account was created for')
+
+			return redirect('/')
+		
+
+	context = {'form':form}
 	return render(request, 'accounts/create_customer.html', context)
 
 @login_required(login_url='login')
@@ -170,6 +190,28 @@ def createOrder(request):
 	context = {'form': form, 'status': Order.STATUS_L, 'customers': customers, 'products': products,
 			   'units': Order.UNITS}
 	return render(request, 'accounts/order_form.html', context)
+
+
+def get_customer_data(request):
+	
+	if request.method == 'POST':
+		try:
+			param = request.POST
+			param = param.dict()
+			param['customer_id'] = int(param['customer_id'])
+
+			customer = Customer.objects.get(pk=param['customer_id'])
+			context = {
+				'error': False,
+				'customer': model_to_dict(customer)
+			}
+		except:
+			context = {
+				'error': True,
+				'customer': None
+			}
+
+		return JsonResponse(context)
 
 
 

@@ -4,15 +4,28 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Customer(models.Model):
-	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-	name = models.CharField(max_length=200, null=True)
-	phone = models.CharField(max_length=200, null=True)
+	# user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+
+	company_name = models.CharField(max_length=200, null=True)
+	telephone = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200, null=True)
-	profile_pic = models.ImageField(default="profile1.png", null=True, blank=True)
+	#profile_pic = models.ImageField(default="profile1.png", null=True, blank=True)
+	street = models.CharField(max_length=200, null=True)
+	city = models.CharField(max_length=200, null=True)
+	muncipality = models.CharField(max_length=200, null=True)
+	state = models.CharField(max_length=200, null=True)
+	country = models.CharField(max_length=200, null=True)
+	poboxno = models.CharField(max_length=200, null=True)
+	postoffice = models.CharField(max_length=200, null=True)
+	contact_person1= models.CharField(max_length=200, null=True)
+	mobile1= models.CharField(max_length=200, null=True)
+	contact_person2= models.CharField(max_length=200, null=True)
+	mobile2= models.CharField(max_length=200, null=True)
+
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 
 	def __str__(self):
-		return self.name
+		return self.company_name
 
 
 class Tag(models.Model):
@@ -54,7 +67,7 @@ class Order(models.Model):
 	]
 	Date = models.DateField()
 	order_no = models.CharField(max_length=200, null=True)
-	company_name = models.CharField(max_length=200, null=True)
+	order_name = models.CharField(max_length=200, null=True)
 	tel_phone = models.CharField(max_length=200, null=True)
 	street = models.CharField(max_length=200, null=True)
 	city = models.CharField(max_length=200, null=True)

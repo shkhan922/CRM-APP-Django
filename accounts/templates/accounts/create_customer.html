@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="card card-body">
-            <h1>Create A New Customer </h1>
+            <h1>Create A New Customer/Company</h1>
 		</div>
 	</div>
 </div>
@@ -31,11 +31,11 @@
                             </div>
                             <div class="col-3">
                                 <span>TELEPHONE</span>
-                                <input type="text" name="tel_phone" maxlength="200" class="form-control" required="" id="id_tel_phone">
+                                <input type="text" name="telephone" maxlength="200" class="form-control"  id="id_tel_phone">
                             </div>
                             <div class="col-3">
                                 <span>EMAIL</span>
-                                <input type="text" name="email" maxlength="200" class="form-control" required="" id="id_tel_phone">
+                                <input type="text" name="email" maxlength="200" class="form-control"  id="id_tel_phone">
                             </div>
                             <div class="col-12">
                                 <span>ADDRESS</span>
@@ -43,224 +43,72 @@
                             </div>
                             <div class="col-3">
                                 <span>STREET</span>
-                                <input type="text" name="street" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="street" maxlength="200" class="form-control" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>CITY</span>
-                                <input type="text" name="city" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="city" maxlength="200" class="form-control" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>MUNCIPALITY</span>
-                                <input type="text" name="muncipality" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="muncipality" maxlength="200" class="form-control" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>STATE</span>
-                                <input type="text" name="state" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="state" maxlength="200" class="form-control"  id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>COUNTRY</span>
-                                <input type="text" name="country" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="country" maxlength="200" class="form-control" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>P.O BOX NO.</span>
-                                <input type="text" name="pobox" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="poboxno" maxlength="200" class="form-control" id="id_address">
                             </div>
                             <div class="col-3">
                                 <span>POST OFFICE</span>
-                                <input type="text" name="post-office" maxlength="200" class="form-control" required="" id="id_address">
+                                <input type="text" name="postoffice" maxlength="200" class="form-control" id="id_address">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-3"></div>
                             <div class="col-3">
                                 <span>CONTACT PERSON NAME</span>
-                                 <input type="text" name="contact-person">
+                                 <input type="text" name="contact_person1">
                                     
         
                             </div>
                             <div class="col-3">
                                 <span>MOBILE NUMBER</span>
-                                <input type="text" name="contact" maxlength="200" class="form-control" required="" id="id_contact">
+                                <input type="text" name="mobile1" maxlength="200" class="form-control" id="id_contact">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <span>CONTACT PERSON NAME</span>
+                                 <input type="text" name="contact_person2">
+                                    
+        
+                            </div>
+                            <div class="col-3">
+                                <span>MOBILE NUMBER</span>
+                                <input type="text" name="mobile2" maxlength="200" class="form-control"  id="id_contact">
                             </div>
                         </div>
                         <div class="row">
                           
 
                         <hr>
-                        <button type="button" class="btn btn-info" onclick="onclick_add_order()">Add</button>
+                        <!-- <button type="button" class="btn btn-info" onclick="onclick_add_order()">Add</button> -->
+                        <div class="btn btn-info d-flex justify-content-center mt-3 login_container">
+                            <input class="btn login_btn" type="submit" value="Add">
+                          </div>
                     </div>
 			</form>
 		</div>
 	</div>
 
 </div>
-<script>
-    let products = [];
-    {% for item in products %}
-        var product_item = {
-            'id': '{{ item.id}}',
-            'name': '{{ item.name}}',
-            'brand': '{{ item.brand}}',
-            'code': '{{ item.code}}',
-        };
-        products.push(product_item);
-    {% endfor %}
 
-    let units = [];
-    {% for item in units %}
-        var unit_item = {
-            'name': '{{ item.name}}',
-            'val': '{{ item.val}}',
-        };
-        units.push(unit_item);
-    {% endfor %}
-
-    function onclick_add_product(){
-        var i = $("#multi_product")[0].childNodes.length;
-
-        var htm = '';
-        htm += '<tr id="product_tr_' + i + '">';
-
-        var productname_htm = '';
-        productname_htm += '<select class="pd_row__fill-weki form-control td_mg" name="productname" id="id_productname" onchange="onclick_product_row(' + i +')">';
-        for (var k = 0;k < products.length;k++){
-            productname_htm += '<option value="'+ products[k].id +'">' + products[k].name + '</option>';
-        }
-        productname_htm += '</select>';
-
-        htm += '<td>';
-        htm += productname_htm;
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<span class="pd_row__fill-weki form-control td_mg" id="brand_' + i +'">' + products[0].brand +'</span>';
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<span class="pd_row__fill-weki form-control td_mg" id="code_' + i +'">' + products[0].code +'</span>';
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<input class="pd_row__fill-weki form-control td_mg" id="price_' + i + '" value="0" type="number" style="" onchange="onclick_total_v_row(' + i + ')">';
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<input class="pd_row__fill-weki form-control td_mg" id="qty_' + i + '" value="0" type="number" style="" onchange="onclick_total_v_row(' + i + ')">';
-        htm += '</td>';
-
-        var unit_htm = '';
-        unit_htm += '<select class="pd_row__fill-weki form-control td_mg" name="unit" id="id_unit">';
-        for (var k = 0;k < units.length;k++){
-            unit_htm += '<option value="' + units[k]['val'] +'">' + units[k]['name'] + '</option>';
-        }
-        unit_htm += '</select>';
-
-        htm += '<td>';
-        htm += unit_htm;
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<input class="pd_row__fill-weki form-control" id="discount_' + i + '" value="0" type="number" style="" onchange="onclick_total_v_row(' + i + ')">';
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<span class="pd_row__fill-weki form-control td_mg" id="total_' + i +'">' + 0 +'</span>';
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<button type="button" class="btn btn-info" onclick="onclick_delete_row('+ i +')">Delete</button>';
-        htm += '</td>';
-
-        htm += '</tr>';
-
-        $("#multi_product").append(htm);
-
-    }
-    function onclick_product_row(row_id){
-        var product_id = $('#product_tr_' + row_id + ' #id_productname').val();
-        for (var k = 0;k < products.length;k++){
-            if (products[k]['id'] == product_id){
-                $('#product_tr_' + row_id + ' #brand_' + row_id).text(products[k]['brand']);
-                $('#product_tr_' + row_id + ' #code_' + row_id).text(products[k]['code']);
-            }
-        }
-    }
-    function onclick_total_v_row(row_id){
-        var row_price = $('#product_tr_' + row_id + ' #price_' + row_id).val();
-        var row_qty = $('#product_tr_' + row_id + ' #qty_' + row_id).val();
-        var row_discount = $('#product_tr_' + row_id + ' #discount_' + row_id).val();
-        row_price = parseFloat(row_price);
-        row_qty = parseInt(row_qty);
-        row_discount = parseFloat(row_discount);
-        var total = row_price * row_qty * (100 - row_discount) / 100;
-        $('#product_tr_' + row_id + ' #total_' + row_id).text(total.toFixed(2));
-
-        var total_len = $("#multi_product")[0].childNodes.length;
-        var totalv = 0;
-        for(var i = 0; i < total_len; i++){
-            var row_total = $('#product_tr_' + i + ' #total_' + i).text();
-            row_total = parseFloat(row_total);
-            totalv += row_total;
-        }
-        $("#totalv").text(totalv.toFixed(2));
-        $("#gvat").text((totalv * 0.05).toFixed(2));
-        $("#gtotalv").text((totalv * 0.95).toFixed(2));
-    }
-    function onclick_add_order(){
-        var total_len = $("#multi_product")[0].childNodes.length;
-        var product_ids_array = [];
-        var qty_array = [];
-        var price_array = [];
-        var discount_array = [];
-        for(var i = 0; i < total_len; i++){
-            if ($('#product_tr_' + i)[0].style.display == 'none')
-                continue;
-            var row_product_id = $('#product_tr_' + i + ' #id_productname').val();
-            var row_price = $('#product_tr_' + i + ' #price_' + i).val();
-            var row_qty = $('#product_tr_' + i + ' #qty_' + i).val();
-            var row_discount = $('#product_tr_' + i + ' #discount_' + i).val();
-            if (row_price == '' || row_qty == "" || row_discount == ''){
-                alert("Invalid inputs in table");return;
-            }
-            row_price = parseFloat(row_price);
-            row_qty = parseInt(row_qty);
-            row_discount = parseFloat(row_discount);
-            product_ids_array.push(parseInt(row_product_id));
-            qty_array.push(row_qty);
-            price_array.push(row_price);
-            discount_array.push(row_discount);
-        }
-        var param = {
-            order_name: $('#id_order_name').val(),
-            status: $('#id_status').val(),
-            order_no: $('#id_order_no').val(),
-            company_name: $('#id_company_name').val(),
-
-            tel_phone: $('#id_tel_phone').val(),
-            address: $('#id_address').val(),
-            contact: $('#id_contact').val(),
-            customer_id: parseInt($('#id_customer').val()),
-
-            product:JSON.stringify(product_ids_array),
-            price:JSON.stringify(price_array),
-            qty:JSON.stringify(qty_array),
-            discount:JSON.stringify(discount_array),
-        };
-        $.ajax({
-            type: "POST",
-            url: "/create_order/",
-            data: param,
-            success: function(res){
-                if (res === "success"){
-                    alert("Order added");
-                } else {
-                    alert("Error occured");
-                }
-            }
-        })
-    }
-    function onclick_delete_row(row_id){
-        $('#product_tr_' + row_id).css('display', 'none');
-    }
-</script>
 {% endblock %}

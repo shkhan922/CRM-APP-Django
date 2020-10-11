@@ -45,11 +45,18 @@
                             </div>
                             <div class="col-3">
                                 <span>COMPANY NAME</span>
-                                <input type="text" name="company_name" maxlength="200" class="form-control" required="" id="id_company_name">
+                                <select name="customer" class="form-control" required="" id="id_customer" onchange="onCompanySelect()">
+                                    <option value="">Select Company</option>
+                                    {% for item in customers %}
+                                        <option value="{{ item.id }}">{{ item.company_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                
                             </div>
                             <div class="col-3">
                                 <span>TELEPHONE</span>
                                 <input type="text" name="tel_phone" maxlength="200" class="form-control" required="" id="id_tel_phone">
+
                             </div>
                             <div class="col-12">
                                 <span>ADDRESS</span>
@@ -87,12 +94,19 @@
                         <div class="row">
                             <div class="col-3"></div>
                             <div class="col-3">
-                                <span>CUSTOMER NAME</span>
-                                <select name="customer" class="form-control" required="" id="id_customer">
-                                    {% for item in customers %}
-                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                    {% endfor %}
-                                </select>
+                                <span>CONTACT PERSON</span>
+                                <input type="text" name="contact-person" maxlength="200" class="form-control" required="" id="id_contactperson">
+                            </div>
+                            <div class="col-3">
+                                <span>CONTACT NUMBER</span>
+                                <input type="text" name="contact" maxlength="200" class="form-control" required="" id="id_contact">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <span>CONTACT PERSON</span>
+                                <input type="text" name="contact-person" maxlength="200" class="form-control" required="" id="id_contactperson">
                             </div>
                             <div class="col-3">
                                 <span>CONTACT NUMBER</span>
@@ -366,5 +380,25 @@
     function onclick_delete_row(row_id){
         $('#product_tr_' + row_id).css('display', 'none');
     }
+
+
+    function onCompanySelect(){
+        $.ajax({
+            type: "POST",
+            url: "/get_customer_data/",
+            data: {customer_id: jQuery('#id_customer').val()},
+            success: function(res){
+
+                if(res.error){
+                    alert('Error Occured');
+                }
+                else{
+                    jQuery('#id_tel_phone').val((res.customer.telephone ? res.customer.telephone : ''))
+                }
+            }
+        })
+
+    }
+
 </script>
 {% endblock %}
