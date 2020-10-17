@@ -49,6 +49,7 @@ class Product(models.Model):
 	name = models.CharField(max_length=200, null=True)
 	brand = models.CharField(max_length=200, null=True)
 	code = models.CharField(max_length=200, null=True)
+	size = models.CharField(max_length=200, null=True)
 	price = models.FloatField(null=True)
 	category = models.CharField(max_length=200, null=True, choices=CATEGORY)
 	description = models.CharField(max_length=200, null=True, blank=True)
@@ -68,12 +69,11 @@ class Order(models.Model):
 		'Pending', 'Out for delivery', 'Delivered'
 	]
 	UNITS = [
-		{"name": "Ton", 'val': 1000},
-		{"name": "Kg", 'val': 1}
+		{"name": "Ton", 'val': 1000}
 	]
-	Date = models.DateField()
+	Date = models.DateField(null=True)
 	order_no = models.CharField(max_length=200, null=True)
-	order_name = models.CharField(max_length=200, null=True)
+	company_name = models.CharField(max_length=200, null=True)
 	tel_phone = models.CharField(max_length=200, null=True)
 	street = models.CharField(max_length=200, null=True)
 	city = models.CharField(max_length=200, null=True)
@@ -87,13 +87,24 @@ class Order(models.Model):
 	price = models.CharField(max_length=200, null=True)
 	qty = models.CharField(max_length=200, null=True)
 	discount = models.CharField(max_length=200, null=True)
+	total = models.CharField(max_length=200, null=True)
+	sub_total = models.CharField(max_length=200, null=True)
 	status = models.CharField(max_length=200, null=True, choices=STATUS)
+	vat = models.CharField(max_length=200, null=True)
+	transport_charge = models.CharField(max_length=200, null=True)
+	grand_total = models.CharField(max_length=200, null=True)
+	payment_terms = models.CharField(max_length=200, null=True)
+	collection_terms = models.CharField(max_length=200, null=True)
+	delivery_to = models.CharField(max_length=200, null=True)
+
+	delivery_days = models.CharField(max_length=200, null=True)
+	notes = models.CharField(max_length=300, null=True)
 	#customer = models.ForeignKey(Customer, on_delete= models.SET_NULL, null=True)
-	customer_id = models.IntegerField(blank=True, default=0)
+	sales_person = models.CharField(max_length=200, null=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 	def __str__(self):
-		return str(self.order_name)
+		return str(self.order_no)
 
 
 

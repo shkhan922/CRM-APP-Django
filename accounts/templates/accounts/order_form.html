@@ -139,22 +139,23 @@
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
-                                <span>Total:</span>
+                                <span>Sub-Total:</span>
                                 <span id="totalv">0</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
-                            <span>Vat 5%:</span>
-                            <span id="gvat">0</span>
+                            <span>Vat</span>
+                            <input type="text" name="vat" maxlength="200" class="form-control" required="" id="vat" onchange="onclick_grand_total()">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
-                            <span>Transportaion Charge</span>
-                            <span id="transcharge">0</span>
+                            <span>Transportation Charge</span>
+                            <input type="text" name="transport_charge" maxlength="200" class="form-control" required="" id="transport_charge" onchange="onclick_grand_total()">
+                            <!--<span id="transcharge">0</span>-->
                             </div>
                         </div>
                         <div class="row">
@@ -164,41 +165,42 @@
                             <span id="gtotalv">0</span>
                             </div>
                         </div>
+
                         <div class="row">
                             
                             <div class="col-3">
                             <span>Payment Terms</span>
-                            <span id="gtotalv">0</span>
+                            <span id="payment_terms">0</span>
                             </div>
                             
                         
                             
                             <div class="col-3">
                             <span>Collection Terms</span>
-                            <span id="gtotalv">0</span>
+                            <span id="collection_terms">0</span>
                             </div>
 
-                            
                             <div class="col-3">
-                            <span>Deliver to </span>
-                            <span id="gtotalv">0</span>
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <div class="col-12">
-                                <span> Delivery :</span><span> After __ No. Of days</span>
+                                <span>Delivery To</span>
+                                <span id="delivery_to">0</span>
                                 </div>
-
-                        </div>
+                            </div>
                         <div class='row'>
                             <div class="col-12">
-                                <textarea rows="4" cols="50" name="comment" form="usrform"></textarea>
+                                Delivery After <input type="text" name="delivery_days" id="delivery_days"> No. Of days
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <span> Notes</span>
+                            <div class="col-12">
+                                
+                                <textarea rows="4" cols="50" name="notes" id="notes"></textarea>
                             </div>
                         </div>
 
                         <div class='row'>
                             <div class="col-12">
-                                UserName (Sales Person): <input type="text" name="usrname">
+                                UserName (Sales Person): <input type="text" name="sales_person" id="sales_person">
                             </div>
                         </div>
                         
@@ -220,6 +222,7 @@
             'name': '{{ item.name}}',
             'brand': '{{ item.brand}}',
             'code': '{{ item.code}}',
+            'size': '{{ item.size}}',
         };
         products.push(product_item);
     {% endfor %}
@@ -240,7 +243,8 @@
         htm += '<tr id="product_tr_' + i + '">';
 
         var productname_htm = '';
-        productname_htm += '<select class="pd_row__fill-weki form-control td_mg" name="productname" id="id_productname" onchange="onclick_product_row(' + i +')">';
+        productname_htm += '<select class="pd_row__fill-weki form-control td_mg id_productname" name="productname" onchange="onclick_product_row(' + i +')">';
+        productname_htm += '<option value="">Select</option>';
         for (var k = 0;k < products.length;k++){
             productname_htm += '<option value="'+ products[k].id +'">' + products[k].name + '</option>';
         }
@@ -252,7 +256,12 @@
 
         htm += '<td>';
         htm += productname_htm;
+        htm += '<input type="hidden" name="product_size_'+i+'" id="product_size_'+i+'" />';
         htm += '</td>';
+    
+       // htm += '<td>';
+       // htm += '<select name="Size" class="form-control" required="" id="id_size"><option value="">8 mm </option><option value="">10 mm </option><option value="">12 mm </option><option value="">14 mm </option><option value="">16 mm </option><option value="">18 mm </option><option value="">20 mm </option><option value="">25 mm </option>';
+       // htm += '</td>';
 
         htm += '<td>';
         htm += '<span class="pd_row__fill-weki form-control td_mg" id="brand_' + i +'">' + products[0].brand +'</span>';
@@ -263,11 +272,11 @@
         htm += '</td>';
 
         htm += '<td>';
-        htm += '<input class="pd_row__fill-weki form-control td_mg" id="price_' + i + '" value="0" type="number" style="" onchange="onclick_total_v_row(' + i + ')">';
+        htm += '<input class="pd_row__fill-weki form-control td_mg product_qty" id="qty_' + i + '" value="0" type="Text" style="" onchange="onclick_total_v_row(' + i + ')">';
         htm += '</td>';
 
         htm += '<td>';
-        htm += '<input class="pd_row__fill-weki form-control td_mg" id="qty_' + i + '" value="0" type="number" style="" onchange="onclick_total_v_row(' + i + ')">';
+        htm += '<input class="pd_row__fill-weki form-control td_mg" id="ton_' + i + '" value="0" type="text" style="" onchange="onclick_total_v_row(' + i + ')">';
         htm += '</td>';
 
         var unit_htm = '';
@@ -282,11 +291,11 @@
         htm += '</td>';
 
         htm += '<td>';
-        htm += '<input class="pd_row__fill-weki form-control" id="discount_' + i + '" value="0" type="number" style="" onchange="onclick_total_v_row(' + i + ')">';
+        htm += '<input class="pd_row__fill-weki form-control" id="price_' + i + '" value="0" type="number" style="" onchange="onclick_total_v_row(' + i + ')">';
         htm += '</td>';
 
         htm += '<td>';
-        htm += '<span class="pd_row__fill-weki form-control td_mg" id="total_' + i +'">' + 0 +'</span>';
+        htm += '<input class="pd_row__fill-weki form-control td_mg" id="discount_' + i +'" value="0" onchange="onclick_total_v_row(' + i + ')"/>';
         htm += '</td>';
 
         htm += '<td>';
@@ -302,46 +311,100 @@
         $("#multi_product").append(htm);
 
     }
+
+
+    function onclick_grand_total(){
+        var vat = $('#vat').val();
+        var total = $("#totalv").text();
+        var transportCharge = $('#transport_charge').val();
+
+        vat = parseFloat(vat);
+        total = parseFloat(total);
+        transportCharge = parseFloat(transportCharge);
+
+        if(vat === NaN)
+            vat = 0.0;
+        if(total === NaN)
+            total = 0.0;
+        if(transportCharge === NaN)
+            transportCharge = 0.0;
+
+        $("#gtotalv").text((total + (total * vat/100) + transportCharge).toFixed(2));
+    }
+
     function onclick_product_row(row_id){
-        var product_id = $('#product_tr_' + row_id + ' #id_productname').val();
+        var product_id = $('#product_tr_' + row_id + ' .id_productname').val();
         for (var k = 0;k < products.length;k++){
             if (products[k]['id'] == product_id){
                 $('#product_tr_' + row_id + ' #brand_' + row_id).text(products[k]['brand']);
                 $('#product_tr_' + row_id + ' #code_' + row_id).text(products[k]['code']);
+                $('#product_tr_' + row_id + ' #product_size_' + row_id).val(products[k]['size']);
             }
         }
     }
     function onclick_total_v_row(row_id){
+
+
+        var sizeArray = {
+            '8': '210',
+            '10': '135',
+            '12': '92',
+            '14': '68',
+            '16': '52',
+            '18': '41',
+            '20': '33',
+            '25': '21'
+        };
+        var ton = '';
+        
+
         var row_price = $('#product_tr_' + row_id + ' #price_' + row_id).val();
         var row_qty = $('#product_tr_' + row_id + ' #qty_' + row_id).val();
         var row_discount = $('#product_tr_' + row_id + ' #discount_' + row_id).val();
+        var row_size = $('#product_tr_' + row_id + ' #product_size_' + row_id).val();
         row_price = parseFloat(row_price);
         row_qty = parseInt(row_qty);
         row_discount = parseFloat(row_discount);
-        var total = row_price * row_qty * (100 - row_discount) / 100;
+
+        for (let key in sizeArray) {
+            console.log(key, sizeArray[key]);
+            if(row_size == key){
+                ton = (row_qty/sizeArray[key]).toFixed(2);
+                break;
+            }
+        }
+        $('#ton_'+row_id).val(ton);
+
+        var tempTotal = (row_price * ton).toFixed(2);
+        var percentageDicount = tempTotal * (row_discount) / 100;
+        var total = tempTotal - percentageDicount;
         $('#product_tr_' + row_id + ' #total_' + row_id).text(total.toFixed(2));
 
-        var total_len = $("#multi_product")[0].childNodes.length;
+        var total_len = $("#multi_product").children().length;
         var totalv = 0;
-        for(var i = 0; i < total_len; i++){
+        for(var i = 1; i <= total_len; i++){
             var row_total = $('#product_tr_' + i + ' #total_' + i).text();
             row_total = parseFloat(row_total);
             totalv += row_total;
         }
         $("#totalv").text(totalv.toFixed(2));
-        $("#gvat").text((totalv * 0.05).toFixed(2));
-        $("#gtotalv").text((totalv * 0.95).toFixed(2));
+        $("#vat").val((totalv * 0.05).toFixed(2));
+
+        var vat = $("#vat").val();
+        $("#gtotalv").text((totalv + (totalv * vat/100)).toFixed(2));
     }
     function onclick_add_order(){
         var total_len = $("#multi_product")[0].childNodes.length;
+        console.log("total_len", total_len)
         var product_ids_array = [];
         var qty_array = [];
         var price_array = [];
         var discount_array = [];
-        for(var i = 0; i < total_len; i++){
-            if ($('#product_tr_' + i)[0].style.display == 'none')
+        for(var i = 1; i <= total_len; i++){
+            if ($('#product_tr_' + i+'').css('display')=='none')
                 continue;
-            var row_product_id = $('#product_tr_' + i + ' #id_productname').val();
+            var row_product_id = $('#product_tr_' + i + ' td select.id_productname').val();
+
             var row_price = $('#product_tr_' + i + ' #price_' + i).val();
             var row_qty = $('#product_tr_' + i + ' #qty_' + i).val();
             var row_discount = $('#product_tr_' + i + ' #discount_' + i).val();
@@ -357,20 +420,35 @@
             discount_array.push(row_discount);
         }
         var param = {
-            order_name: $('#id_order_name').val(),
+            Date: $('#id_date').val(),
             status: $('#id_status').val(),
-            order_no: $('#id_order_no').val(),
-            company_name: $('#id_company_name').val(),
-
-            tel_phone: $('#id_tel_phone').val(),
-            address: $('#id_address').val(),
-            contact: $('#id_contact').val(),
-            customer_id: parseInt($('#id_customer').val()),
-
+	        order_no: $('#id_order_no').val(),
+	        company_name: $('#id_customer').val(),
+	        tel_phone: $('#id_tel_phone').val(),
+	        street: $('#street').val(), 
+	        city: $('#city').val(),
+	        muncipality: $('#muncipality').val(),
+	        state: $('#state').val(),
+	        country: $('#country').val(),
+	        poboxno: $('#poboxno').val(),
+	        postoffice: $('#postoffice').val(),
+	        contact: $('#id_contactperson').val(),
+            sub_total: $('#totalv').text(),
+	        vat: $('#vat').val(),
+            transport_charge: $('#transport_charge').val(),
+            grand_total: $('#gtotalv').val(),
+            payment_terms: $('#payment_terms').val(),
+            collection_terms: $('#collection_terms').val(),
+            delivery_to: $('#delivery_to').val(),
+            delivery_days: $('#delivery_days').val(),
+            notes: $('#notes').val(),
+            sales_person: $('#sales_person').val(),
+            //order_no: $('#id_order_no').val(),
             product:JSON.stringify(product_ids_array),
             price:JSON.stringify(price_array),
             qty:JSON.stringify(qty_array),
             discount:JSON.stringify(discount_array),
+            total: JSON.stringify(discount_array),
         };
         $.ajax({
             type: "POST",
@@ -407,6 +485,7 @@
                     alert('Error Occured');
                 }
                 else{
+
                     jQuery('#id_tel_phone').val((res.customer.telephone ? res.customer.telephone : ''))
                     jQuery('#street').val((res.customer.street ? res.customer.street : ''))
                     jQuery('#city').val((res.customer.city ? res.customer.city : ''))
@@ -415,7 +494,11 @@
                     jQuery('#country').val((res.customer.country ? res.customer.country : ''))
                     jQuery('#poboxno').val((res.customer.poboxno ? res.customer.poboxno : ''))
                     jQuery('#postoffice').val((res.customer.postoffice ? res.customer.postoffice : ''))
-                   
+                    jQuery('#poboxno').val((res.customer.poboxno ? res.customer.poboxno : ''))
+                    jQuery('#postoffice').val((res.customer.postoffice ? res.customer.postoffice : ''))
+                    //jQuery('#id_contactperson').val((res.customer.poboxno ? res.customer.poboxno : ''))
+                    //jQuery('#postoffice').val((res.customer.postoffice ? res.customer.postoffice : ''))
+                    
                     
                     
 
@@ -427,6 +510,18 @@
         })
 
     }
+
+
+    function onProductAdd(){
+     
+    }
+
+    function datepickerLoad() {
+        jQuery( "#id_date" ).datepicker({dateFormat: "yy-mm-dd"});
+        
+    }
+    datepickerLoad();
+  
 
 </script>
 {% endblock %}

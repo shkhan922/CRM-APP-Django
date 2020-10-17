@@ -181,18 +181,15 @@ def customer(request, pk_test):
 
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
-def createOrder(request):
-	form = OrderForm()
-	if request.method == 'POST':
-		try:
-			param = request.POST
-			param = param.dict()
-			param['customer_id'] = int(param['customer_id'])
-			obj = Order(**param)
-			obj.save()
-		except:
-			return HttpResponse("error")
-		return HttpResponse('success')
+def create_order(request):
+	form = OrderForm(request.POST)
+	param = request.POST
+	param = param.dict()
+	print(param)
+			#param['company_name'] = int(param['company_name'])
+	obj = Order(**param)
+	obj.save()
+
 	customers = list(Customer.objects.all().values())
 	products = list(Product.objects.all().values())
 	context = {'form': form, 'status': Order.STATUS_L, 'customers': customers, 'products': products,

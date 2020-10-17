@@ -20,7 +20,7 @@ urlpatterns = [
     path('customer/<str:pk_test>/', views.customer, name="customer"),
     
     path('create_customer/', views.create_customer, name="create_customer"),
-    path('create_order/', views.createOrder, name="create_order"),
+    path('create_order/', views.create_order, name="create_order"),
     path('update_order/<str:pk>/', views.updateOrder, name="update_order"),
     path('delete_order/<str:pk>/', views.deleteOrder, name="delete_order"),
 
