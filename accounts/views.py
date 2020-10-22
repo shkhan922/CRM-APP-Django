@@ -189,6 +189,9 @@ def create_order(request):
 			#param['company_name'] = int(param['company_name'])
 	obj = Order(**param)
 	obj.save()
+	
+	#return JsonResponse('success')
+	#return HttpResponse('success')
 
 	customers = list(Customer.objects.all().values())
 	products = list(Product.objects.all().values())

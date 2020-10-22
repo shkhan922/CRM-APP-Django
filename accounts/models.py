@@ -71,6 +71,7 @@ class Order(models.Model):
 	UNITS = [
 		{"name": "Ton", 'val': 1000}
 	]
+
 	Date = models.DateField(null=True)
 	order_no = models.CharField(max_length=200, null=True)
 	company_name = models.CharField(max_length=200, null=True)
@@ -107,5 +108,19 @@ class Order(models.Model):
 		return str(self.order_no)
 
 
+class Lead(models.Model):
 
-	
+	order = models.ForeignKey(Order, on_delete= models.SET_NULL, null=True)
+
+
+	def __str__(self):
+		return str(self.order)
+
+class Deal(models.Model):
+
+	deal = models.ForeignKey(Lead, on_delete= models.SET_NULL, null=True)
+
+
+	def __str__(self):
+		return str(self.deal)
+

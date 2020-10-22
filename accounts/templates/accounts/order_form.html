@@ -92,25 +92,32 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-3">
-                                <span>CONTACT PERSON</span>
-                                <input type="text" name="contact-person" maxlength="200" class="form-control" required="" id="id_contactperson">
-                            </div>
-                            <div class="col-3">
-                                <span>CONTACT NUMBER</span>
-                                <input type="text" name="contact" maxlength="200" class="form-control" required="" id="id_contact">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-3">
-                                <span>CONTACT PERSON</span>
-                                <input type="text" name="contact-person" maxlength="200" class="form-control" required="" id="id_contactperson">
-                            </div>
-                            <div class="col-3">
-                                <span>CONTACT NUMBER</span>
-                                <input type="text" name="contact" maxlength="200" class="form-control" required="" id="id_contact">
+                            <p>&nbsp;<br/></p>
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <div style="margin-top: 5px;margin-bottom: 5px">
+                                    <span style="margin-right: 15px"><b>Contact Persons</b></span>
+                                    <button type="button" class="btn btn-info" onclick="onclick_add_contact()">+Add new item</button>
+                                </div>
+                                <table width="100%">
+                                    <thead>
+                                        <th>S. No.</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody id="contact_persons">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <input type="text" class="form-control" name="contact_person_name[]" required>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="contact_person_mobile[]" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="row">
@@ -170,19 +177,34 @@
                             
                             <div class="col-3">
                             <span>Payment Terms</span>
-                            <span id="payment_terms">0</span>
+                            <select name="Payment Terms" class="form-control" required="" id="payment_terms" onchange="">
+                                <option value="">A</option>
+                                <option value="">B</option>
+                                <option value="">C</option>
+                                <option value="">D</option>
+                                </select>
                             </div>
                             
                         
                             
                             <div class="col-3">
                             <span>Collection Terms</span>
-                            <span id="collection_terms">0</span>
+                            <select name="CollectionTerms" class="form-control" required="" id="collection_terms" onchange="">
+                                <option value="">A</option>
+                                <option value="">B</option>
+                                <option value="">C</option>
+                                <option value="">D</option>
+                                </select>
                             </div>
 
                             <div class="col-3">
                                 <span>Delivery To</span>
-                                <span id="delivery_to">0</span>
+                                <select name="Delivery To" class="form-control" required="" id="delivery_to" onchange="">
+                                    <option value="">A</option>
+                                    <option value="">B</option>
+                                    <option value="">C</option>
+                                    <option value="">D</option>
+                                    </select>
                                 </div>
                             </div>
                         <div class='row'>
@@ -215,6 +237,8 @@
 
 </div>
 <script>
+
+    
     let products = [];
     {% for item in products %}
         var product_item = {
@@ -517,11 +541,51 @@
     }
 
     function datepickerLoad() {
-        jQuery( "#id_date" ).datepicker({dateFormat: "yy-mm-dd"});
+        jQuery( "#id_date" ).datepicker({dateFormat: "yy-mm-dd"}).datepicker('setDate', new Date());
+        
         
     }
     datepickerLoad();
   
+
+
+    function onclick_add_contact(){
+        var i = ($("#contact_persons").children().length) + 1;
+
+        var htm = '';
+        htm += '<tr id="contact_tr_' + i + '">';
+
+        htm += '<td>';
+        htm += '' + i + '';
+        htm += '</td>';
+
+        htm += '<td>';
+        htm += '<input type="text" class="form-control" name="contact_person_name[]" required>';
+        htm += '</td>';
+
+        htm += '<td>';
+        htm += '<input type="text" name="contact_person_mobile[]" class="form-control" required>';
+        htm += '</td>';
+        
+        htm += '<td>';
+        htm += '<button type="button" class="btn btn-info" onclick="onclick_delete_row('+ i +')">Delete</button>';
+        htm += '</td>';
+
+        htm += '</tr>';
+
+        $("#contact_persons").append(htm);
+    }
+
+    function onclick_delete_row(row_id){
+        $('#contact_tr_' + row_id).remove();
+        reset_index();
+    }
+
+    function reset_index(){
+        $('#contact_persons tr').each(function(i) {
+            $(this).find("td:first").html(i + 1);
+        });
+    }
 
 </script>
 {% endblock %}
