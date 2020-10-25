@@ -64,7 +64,7 @@ def logoutUser(request):
 @login_required(login_url='login')
 #@admin_only
 def home(request):
-	orders = Order.objects.all()
+	orders = LeadOrder.objects.all()
 	customers = Customer.objects.all()
 
 	total_customers = customers.count()
@@ -182,6 +182,7 @@ def customer(request, pk_test):
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
 def create_order(request):
+	'''
 	form = OrderForm(request.POST)
 	param = request.POST
 	param = param.dict()
@@ -195,6 +196,32 @@ def create_order(request):
 
 	customers = list(Customer.objects.all().values())
 	products = list(Product.objects.all().values())
+	context = {'form': form, 'status': LeadOrder.STATUS_L, 'customers': customers, 'products': products,
+			   'units': LeadOrder.UNITS}
+	return render(request, 'accounts/order_form.html', context)
+    '''
+	form = OrderForm()
+	if request.method == 'POST':
+		form = OrderForm(request.POST)
+		param = request.POST
+		param = param.dict()
+		print(param)	
+		
+		try:
+			if form.is_valid():
+				obj = LeadOrder(**param)
+				obj.save()
+				messages.success(request, 'success')
+
+				return redirect('/')
+			else:
+				print("Errors", form.errors)
+				
+		except Exception as error:
+			print("An exception was thrown!")
+			print(error)
+	customers = list(Customer.objects.all().values())
+	products = list(Product.objects.all().values())	
 	context = {'form': form, 'status': LeadOrder.STATUS_L, 'customers': customers, 'products': products,
 			   'units': LeadOrder.UNITS}
 	return render(request, 'accounts/order_form.html', context)
@@ -259,10 +286,10 @@ def updateOrder(request, pk):
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
 def deleteOrder(request, pk):
-	order = Order.objects.get(id=pk)
+	order = LeadOrder.objects.get(id=pk)
 	if request.method == "POST":
 		order.delete()
 		return redirect('/')
 
 	context = {'item':order}
-	return render(request, 'accounts/delete.html', context)
+	return render(request, 'accounts/delete_item.html', context)

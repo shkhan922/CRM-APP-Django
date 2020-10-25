@@ -24,6 +24,17 @@
                                     <div class="w3-container w3-green w3-center" style="width:25%">Lead </div>
                                   </div><br>
                             </div>
+                        
+                               <div class="col-6">
+                                <p>Please select Lead Or Deal:</p>
+                                <input type="radio" id="lead" name="radio" value="lead">
+                                <label for="lead">Lead</label><br>
+                                <input type="radio" id="Deal" name="radio" value="Deal">
+                                <label for="female">Deal</label><br>
+
+                                <br>  
+                               </div>
+                            
                             <div class="col-6"></div>
                             <div class="col-3">
                                 <span>STATUS</span>
@@ -127,7 +138,14 @@
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
-                            <span>Vat</span>
+                            <span>Vat Percentage</span>
+                            <input type="text" name="vat" maxlength="200" class="form-control" required="" id="vat" onchange="onclick_grand_total()">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9"></div>
+                            <div class="col-3">
+                            <span>Vat Value</span>
                             <input type="text" name="vat" maxlength="200" class="form-control" required="" id="vat" onchange="onclick_grand_total()">
                             </div>
                         </div>
@@ -142,7 +160,7 @@
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
-                            <span>Ground Total:</span>
+                            <span>Grand Total:</span>
                             <span id="gtotalv">0</span>
                             </div>
                         </div>
@@ -418,6 +436,7 @@
             discount_array.push(row_discount);
         }
         var param = {
+            order_type: $('#lead').val(),
             Date: $('#id_date').val(),
             status: $('#id_status').val(),
 	        order_no: $('#id_order_no').val(),

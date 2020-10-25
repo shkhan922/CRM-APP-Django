@@ -73,6 +73,7 @@ class LeadOrder(models.Model):
 	]
 
 	Date = models.DateField(null=True)
+	order_type= models.CharField(max_length=200, null=True)
 	order_no = models.CharField(max_length=200, null=True)
 	company_name = models.CharField(max_length=200, null=True)
 	tel_phone = models.CharField(max_length=200, null=True)
