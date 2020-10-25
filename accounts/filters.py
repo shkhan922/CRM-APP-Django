@@ -10,6 +10,6 @@ class OrderFilter(django_filters.FilterSet):
 
 
 	class Meta:
-		model = Order
+		model = LeadOrder
 		fields = '__all__'
 		exclude = ['customer', 'date_created']

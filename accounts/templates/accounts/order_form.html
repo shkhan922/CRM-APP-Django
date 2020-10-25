@@ -91,33 +91,7 @@
                                 <input type="text" name="postoffice" maxlength="200" class="form-control" required="" id="postoffice">
                             </div>
                         </div>
-                        <div class="row">
-                            <p>&nbsp;<br/></p>
-                            <div class="col-6"></div>
-                            <div class="col-6">
-                                <div style="margin-top: 5px;margin-bottom: 5px">
-                                    <span style="margin-right: 15px"><b>Contact Persons</b></span>
-                                    <button type="button" class="btn btn-info" onclick="onclick_add_contact()">+Add new item</button>
-                                </div>
-                                <table width="100%">
-                                    <thead>
-                                        <th>S. No.</th>
-                                        <th>Name</th>
-                                        <th>Mobile</th>
-                                        <th>Action</th>
-                                    </thead>
-                                    <tbody id="contact_persons">
-                                        <tr>
-                                            <td>1</td>
-                                            <td>
-                                                <input type="text" class="form-control" name="contact_person_name[]" required>
-                                            </td>
-                                            <td>
-                                                <input type="text" name="contact_person_mobile[]" class="form-control" required>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        
                             </div>
                         </div>
                         <div class="row">
@@ -546,46 +520,9 @@
         
     }
     datepickerLoad();
-  
+    
+    onclick_total_v_row();
 
-
-    function onclick_add_contact(){
-        var i = ($("#contact_persons").children().length) + 1;
-
-        var htm = '';
-        htm += '<tr id="contact_tr_' + i + '">';
-
-        htm += '<td>';
-        htm += '' + i + '';
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<input type="text" class="form-control" name="contact_person_name[]" required>';
-        htm += '</td>';
-
-        htm += '<td>';
-        htm += '<input type="text" name="contact_person_mobile[]" class="form-control" required>';
-        htm += '</td>';
-        
-        htm += '<td>';
-        htm += '<button type="button" class="btn btn-info" onclick="onclick_delete_row('+ i +')">Delete</button>';
-        htm += '</td>';
-
-        htm += '</tr>';
-
-        $("#contact_persons").append(htm);
-    }
-
-    function onclick_delete_row(row_id){
-        $('#contact_tr_' + row_id).remove();
-        reset_index();
-    }
-
-    function reset_index(){
-        $('#contact_persons tr').each(function(i) {
-            $(this).find("td:first").html(i + 1);
-        });
-    }
 
 </script>
 {% endblock %}

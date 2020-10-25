@@ -187,7 +187,7 @@ def create_order(request):
 	param = param.dict()
 	print(param)
 			#param['company_name'] = int(param['company_name'])
-	obj = Order(**param)
+	obj = LeadOrder(**param)
 	obj.save()
 	
 	#return JsonResponse('success')
@@ -195,8 +195,8 @@ def create_order(request):
 
 	customers = list(Customer.objects.all().values())
 	products = list(Product.objects.all().values())
-	context = {'form': form, 'status': Order.STATUS_L, 'customers': customers, 'products': products,
-			   'units': Order.UNITS}
+	context = {'form': form, 'status': LeadOrder.STATUS_L, 'customers': customers, 'products': products,
+			   'units': LeadOrder.UNITS}
 	return render(request, 'accounts/order_form.html', context)
 
 

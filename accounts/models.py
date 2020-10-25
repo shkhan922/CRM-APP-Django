@@ -59,7 +59,7 @@ class Product(models.Model):
 	def __str__(self):
 		return self.name
 
-class Order(models.Model):
+class LeadOrder(models.Model):
 	STATUS = (
 			('Pending', 'Pending'),
 			('Out for delivery', 'Out for delivery'),
@@ -108,17 +108,9 @@ class Order(models.Model):
 		return str(self.order_no)
 
 
-class Lead(models.Model):
-
-	order = models.ForeignKey(Order, on_delete= models.SET_NULL, null=True)
-
-
-	def __str__(self):
-		return str(self.order)
-
 class Deal(models.Model):
 
-	deal = models.ForeignKey(Lead, on_delete= models.SET_NULL, null=True)
+	deal = models.ForeignKey(LeadOrder, on_delete= models.SET_NULL, null=True)
 
 
 	def __str__(self):
