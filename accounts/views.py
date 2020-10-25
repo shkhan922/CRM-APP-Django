@@ -206,9 +206,9 @@ def create_order(request):
 		param = request.POST
 		param = param.dict()
 		print(param)	
-		
+		a=1
 		try:
-			if form.is_valid():
+			if a==1:
 				obj = LeadOrder(**param)
 				obj.save()
 				messages.success(request, 'success')

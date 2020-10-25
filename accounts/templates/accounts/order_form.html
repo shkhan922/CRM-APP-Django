@@ -146,14 +146,14 @@
                             <div class="col-9"></div>
                             <div class="col-3">
                             <span>Vat Value</span>
-                            <input type="text" name="vat" maxlength="200" class="form-control" required="" id="vat" onchange="onclick_grand_total()">
+                            <input type="text" name="vat" maxlength="200" class="form-control" id="vat_value" onchange="onclick_grand_total()">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
                             <span>Transportation Charge</span>
-                            <input type="text" name="transport_charge" maxlength="200" class="form-control" required="" id="transport_charge" onchange="onclick_grand_total()">
+                            <input type="text" name="transport_charge" maxlength="200" class="form-control" id="transport_charge" onchange="onclick_grand_total()">
                             <!--<span id="transcharge">0</span>-->
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                             
                             <div class="col-3">
                             <span>Payment Terms</span>
-                            <select name="Payment Terms" class="form-control" required="" id="payment_terms" onchange="">
+                            <select name="Payment Terms" class="form-control" id="payment_terms">
                                 <option value="">A</option>
                                 <option value="">B</option>
                                 <option value="">C</option>
@@ -181,7 +181,7 @@
                             
                             <div class="col-3">
                             <span>Collection Terms</span>
-                            <select name="CollectionTerms" class="form-control" required="" id="collection_terms" onchange="">
+                            <select name="CollectionTerms" class="form-control" id="collection_terms">
                                 <option value="">A</option>
                                 <option value="">B</option>
                                 <option value="">C</option>
@@ -191,7 +191,7 @@
 
                             <div class="col-3">
                                 <span>Delivery To</span>
-                                <select name="Delivery To" class="form-control" required="" id="delivery_to" onchange="">
+                                <select name="Delivery To" class="form-control" id="delivery_to">
                                     <option value="">A</option>
                                     <option value="">B</option>
                                     <option value="">C</option>
@@ -449,7 +449,7 @@
 	        country: $('#country').val(),
 	        poboxno: $('#poboxno').val(),
 	        postoffice: $('#postoffice').val(),
-	        contact: $('#id_contactperson').val(),
+	
             sub_total: $('#totalv').text(),
 	        vat: $('#vat').val(),
             transport_charge: $('#transport_charge').val(),
@@ -499,7 +499,7 @@
             success: function(res){
 
                 if(res.error){
-                    alert('Error Occured');
+                    alert('Order Created');
                 }
                 else{
 
