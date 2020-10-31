@@ -206,13 +206,11 @@ def create_order(request):
 		param = request.POST
 		param = param.dict()
 		print(param)	
-		a=1
+	
 		try:
-			if a==1:
+			if form.is_valid():
 				obj = LeadOrder(**param)
 				obj.save()
-				messages.success(request, 'success')
-
 				return redirect('/')
 			else:
 				print("Errors", form.errors)
@@ -220,9 +218,10 @@ def create_order(request):
 		except Exception as error:
 			print("An exception was thrown!")
 			print(error)
+	users = list(User.objects.all().values())
 	customers = list(Customer.objects.all().values())
 	products = list(Product.objects.all().values())	
-	context = {'form': form, 'status': LeadOrder.STATUS_L, 'customers': customers, 'products': products,
+	context = {'form': form, 'status': LeadOrder.STATUS_L, 'users': users, 'customers': customers, 'products': products,
 			   'units': LeadOrder.UNITS}
 	return render(request, 'accounts/order_form.html', context)
 
@@ -234,7 +233,7 @@ def get_customer_data(request):
 			param = request.POST
 			param = param.dict()
 			param['customer_id'] = int(param['customer_id'])
-
+			print(param)
 			customer = Customer.objects.get(pk=param['customer_id'])
 			context = {
 				'error': False,
@@ -270,7 +269,7 @@ def createOrder(request, pk):
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
 def updateOrder(request, pk):
-	order = Order.objects.get(id=pk)
+	order = LeadOrder.objects.get(id=pk)
 	form = OrderForm(instance=order)
 	print('ORDER:', order)
 	if request.method == 'POST':

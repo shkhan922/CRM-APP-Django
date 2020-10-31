@@ -84,7 +84,7 @@ class LeadOrder(models.Model):
 	country = models.CharField(max_length=200, null=True)
 	poboxno = models.CharField(max_length=200, null=True)
 	postoffice = models.CharField(max_length=200, null=True)
-	contact = models.CharField(max_length=200, null=True)
+	#contact = models.CharField(max_length=200, null=True)
 	product = models.CharField(max_length=200, null=True)
 	price = models.CharField(max_length=200, null=True)
 	qty = models.CharField(max_length=200, null=True)
