@@ -477,10 +477,15 @@
             url: "/create_order/",
             data: param,
             success: function(res){
-                if (res === "success"){
-                    alert("Order added");
-                } else {
-                    alert("Error occured");
+                
+                if(res.error){
+                    alert('Error Occured');
+                }
+                else{
+
+                    alert("Order has Added");
+                    window.location="/";
+
                 }
             }
         })

@@ -200,24 +200,44 @@ def create_order(request):
 			   'units': LeadOrder.UNITS}
 	return render(request, 'accounts/order_form.html', context)
     '''
-	form = OrderForm()
+	form = OrderForm()	
 	if request.method == 'POST':
 		form = OrderForm(request.POST)
 		param = request.POST
 		param = param.dict()
-		print(param)	
+		print(param)
+
 	
 		try:
 			if form.is_valid():
 				obj = LeadOrder(**param)
+				
+				query=LeadOrder.objects.order_by("-pk")
+				
+				if len(query)>0:
+					last_id= query[0].pk+1
+					order_no= 'LO_'+str(last_id)
+				else:
+					order_no= 'LO_1'
+				obj.order_no = order_no
 				obj.save()
-				return redirect('/')
+				context = {
+					'error': False
+				}
+				return JsonResponse(context)
 			else:
-				print("Errors", form.errors)
+				context = {
+					'error': True,
+					'message': form.errors
+				}
+				return JsonResponse(context)
 				
 		except Exception as error:
-			print("An exception was thrown!")
-			print(error)
+			context = {
+				'error': True,
+				'message': 'An exception was thrown!'
+			}
+			return JsonResponse(context)
 	users = list(User.objects.all().values())
 	customers = list(Customer.objects.all().values())
 	products = list(Product.objects.all().values())	
@@ -271,15 +291,30 @@ def createOrder(request, pk):
 def updateOrder(request, pk):
 	order = LeadOrder.objects.get(id=pk)
 	form = OrderForm(instance=order)
+	print(form)
 	print('ORDER:', order)
 	if request.method == 'POST':
 
 		form = OrderForm(request.POST, instance=order)
 		if form.is_valid():
+			obj = Deal()
+			query=Deal.objects.order_by("-pk")
+				
+			if len(query)>0:
+				last_id= query[0].pk+1
+				deal_no= 'DN_'+str(last_id)
+			else:
+				order_no= 'DN_1'
+				obj.deal_no = deal_no
+				obj.save()
 			form.save()
 			return redirect('/')
+	users = list(User.objects.all().values())
+	customers = list(Customer.objects.all().values())
+	products = list(Product.objects.all().values())	
+	context = {'form': form, 'status': LeadOrder.STATUS_L, 'users': users, 'customers': customers, 'products': products,
+			   'units': LeadOrder.UNITS}
 
-	context = {'form':form}
 	return render(request, 'accounts/order_form.html', context)
 
 @login_required(login_url='login')
