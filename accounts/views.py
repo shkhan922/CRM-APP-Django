@@ -64,7 +64,7 @@ def logoutUser(request):
 @login_required(login_url='login')
 #@admin_only
 def home(request):
-	orders = LeadOrder.objects.all()
+	orders = LeadOrder.objects.all().order_by('-pk')[0:5]
 	customers = Customer.objects.all()
 
 	total_customers = customers.count()
@@ -119,9 +119,24 @@ def products(request):
 
 	return render(request, 'accounts/products.html', {'products':products})
 
+@login_required(login_url='login')
+#@allowed_users(allowed_roles=['admin'])
+def customers(request):
+	customers = Customer.objects.all()
+
+	return render(request, 'accounts/customers.html', {'customers':customers})
 
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
+def orders(request):
+	orders = LeadOrder.objects.all()
+
+	return render(request, 'accounts/orders.html', {'orders':orders})
+
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def create_customer(request):	
 	form = CustomerForm()
 	if request.method == 'POST':
@@ -169,7 +184,7 @@ def create_customer(request):
 def customer(request, pk_test):
 	customer = Customer.objects.get(id=pk_test)
 
-	orders = customer.order_set.all()
+	orders = LeadOrder.objects.all()
 	order_count = orders.count()
 
 	myFilter = OrderFilter(request.GET, queryset=orders)
@@ -291,29 +306,48 @@ def createOrder(request, pk):
 def updateOrder(request, pk):
 	order = LeadOrder.objects.get(id=pk)
 	form = OrderForm(instance=order)
-	print(form)
-	print('ORDER:', order)
+
+	# print('tst', order.order_no)
+
+	#print(form)
+	print('ORDER form:', form)
 	if request.method == 'POST':
 
 		form = OrderForm(request.POST, instance=order)
 		if form.is_valid():
-			obj = Deal()
+			#obj = Deal()
 			query=Deal.objects.order_by("-pk")
-				
+			print(query)
+
+			param = request.POST
+			param = param.dict()
+
+			obj = Deal(**param)					
+			
 			if len(query)>0:
 				last_id= query[0].pk+1
 				deal_no= 'DN_'+str(last_id)
 			else:
-				order_no= 'DN_1'
-				obj.deal_no = deal_no
-				obj.save()
+				deal_no= 'DN_1'
+
+			# copy code from lead
+
+			obj.deal_no = deal_no
+			obj.save()
 			form.save()
 			return redirect('/')
 	users = list(User.objects.all().values())
 	customers = list(Customer.objects.all().values())
 	products = list(Product.objects.all().values())	
-	context = {'form': form, 'status': LeadOrder.STATUS_L, 'users': users, 'customers': customers, 'products': products,
-			   'units': LeadOrder.UNITS}
+	context = {
+		'form': form, 
+		'status': LeadOrder.STATUS_L, 
+		'users': users, 
+		'customers': customers, 
+		'products': products,
+		'units': LeadOrder.UNITS,
+		'order': order
+	}
 
 	return render(request, 'accounts/order_form.html', context)
 

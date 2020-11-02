@@ -1,0 +1,33 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Customers</h5>
+		</div>
+		<h5>CUSTOMERS: {{total_customers}}</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th></th>
+					<th>Customer</th>
+					<th>Orders</th>
+				</tr>
+				{% for customer in customers %}
+					<tr>
+						<td><a href="{% url 'customer' customer.id %}" class="btn btn-sm btn-info">View</a></td>
+						<td>{{customer.company_name}}</td>
+						<td>{{customer.orders}}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock content %}

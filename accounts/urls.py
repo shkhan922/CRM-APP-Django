@@ -17,6 +17,8 @@ urlpatterns = [
     path('account/', views.accountSettings, name="account"),
 
     path('products/', views.products, name='products'),
+    path('customers/', views.customers, name='customers'),
+    path('orders/', views.orders, name='orders'),
     path('customer/<str:pk_test>/', views.customer, name="customer"),
     
     path('create_customer/', views.create_customer, name="create_customer"),

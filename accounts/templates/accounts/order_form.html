@@ -12,6 +12,18 @@
 	</div>
 </div>
 
+
+
+  <!--<form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit">
+  </form>-->
+
+
+
 <div class="row">
 	<div class="col-12">
 		<div class="card card-body">
@@ -27,7 +39,7 @@
                         
                                <div class="col-6">
                                 <p>Please select Lead Or Deal:</p>
-                                <input type="radio" id="lead" name="radio" value="lead">
+                                <input type="radio" id="lead" name="radio" value="lead" checked>
                                 <label for="lead">Lead</label><br>
                                 <input type="radio" id="Deal" name="radio" value="Deal">
                                 <label for="female">Deal</label><br>
@@ -51,19 +63,22 @@
                                 <input type="text" name="date" maxlength="200" class="form-control" id="id_date" required>
                             </div>
                             <div class="col-3">
-                                <span>ORDER NO</span>
-                                <input type="text" name="order_no" maxlength="200" class="form-control" required="" id="id_order_no">
+                                <span>LEAD NO</span>
+                                <input type="text" name="lead_no" maxlength="200" class="form-control" required="" id="id_lead_no" value={{ order.order_no }}>
                             </div>
                             <div class="col-3">
                                 <span>COMPANY NAME</span>
                                 <select name="customer" class="form-control" required="" id="id_customer" onchange="onCompanySelect()">
                                     <option value="">Select Company</option>
                                     {% for item in customers %}
-                                        <option value="{{ item.id }}">{{ item.company_name }}</option>
+                                        <option value="{{ item.id}}">{{ item.company_name }}</option>
                                     {% endfor %}
                                 </select>
+                                <input type="hidden" name="company_name2" maxlength="200" class="form-control" id="company_name2">
                                 
                             </div>
+
+
                             <div class="col-3">
                                 <span>TELEPHONE</span>
                                 <input type="text" name="tel_phone" maxlength="200" class="form-control" required="" id="id_tel_phone">
@@ -146,14 +161,14 @@
                             <div class="col-9"></div>
                             <div class="col-3">
                             <span>Vat Value</span>
-                            <input type="text" name="vat" maxlength="200" class="form-control" id="vat_value">
+                            <input type="text" name="vat_value" maxlength="200" class="form-control" id="vat_value">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-9"></div>
                             <div class="col-3">
                             <span>Transportation Charge</span>
-                            <input type="text" name="transport_charge" maxlength="200" class="form-control" id="transport_charge">
+                            <input type="text" name="transport_charge" maxlength="200" class="form-control" id="transport_charge"  onchange="onclick_grand_total()"> 
                             <!--<span id="transcharge">0</span>-->
                             </div>
                         </div>
@@ -162,7 +177,7 @@
                             <div class="col-3">
                             <span>Grand Total:</span>
                             
-                            <input type="text" name="grand_total" maxlength="200" class="form-control" id="grand_total" onchange="onclick_grand_total()">
+                            <input type="text" name="grand_total" maxlength="200" class="form-control" id="grand_total">
 
                             
                             </div>
@@ -237,7 +252,6 @@
 </div>
 <script>
 
-    
     let products = [];
     {% for item in products %}
         var product_item = {
@@ -337,9 +351,12 @@
 
 
     function onclick_grand_total(){
-        var vat = $('#vat').val();
-        var total = $("#totalv").text();
-        var transportCharge = $('#transport_charge').val();
+        var vat = jQuery('#vat').val();
+        var total = jQuery("#totalv").text();
+        var transportCharge = jQuery('#transport_charge').val();
+
+        var vat = $("#vat").val();
+        $("#vat_value").val(((total * vat/100)).toFixed(2));
 
         vat = parseFloat(vat);
         total = parseFloat(total);
@@ -352,7 +369,7 @@
         if(transportCharge === NaN)
             transportCharge = 0.0;
 
-        $("#grand_total").text((total + (total * vat/100) + transportCharge).toFixed(2));
+        jQuery("#grand_total").val((total + (total * vat/100) + transportCharge).toFixed(2));
     }
 
     function onclick_product_row(row_id){
@@ -365,6 +382,7 @@
             }
         }
     }
+    
     function onclick_total_v_row(row_id){
 
 
@@ -411,11 +429,14 @@
             totalv += row_total;
         }
         $("#totalv").text(totalv.toFixed(2));
-        $("#vat").val((totalv * 0.05).toFixed(2));
+
+        $("#vat").val((totalv*0.05).toFixed(2));        
 
         var vat = $("#vat").val();
+        $("#vat_value").val(((totalv * vat/100)).toFixed(2));
         $("#grand_total").text((totalv + (totalv * vat/100)).toFixed(2));
     }
+    
     function onclick_add_order(){
         var total_len = $("#multi_product")[0].childNodes.length;
         console.log("total_len", total_len)
@@ -446,8 +467,9 @@
             order_type: $('#lead').val(),
             Date: $('#id_date').val(),
             status: $('#id_status').val(),
-	        order_no: $('#id_order_no').val(),
+	        lead_no: $('#id_lead_no').val(),
 	        company_name: $('#id_customer').val(),
+            company_name2: $('#company_name2').val(),
 	        tel_phone: $('#id_tel_phone').val(),
 	        street: $('#street').val(), 
 	        city: $('#city').val(),
@@ -472,6 +494,15 @@
             discount:JSON.stringify(discount_array),
             total: JSON.stringify(discount_array),
         };
+
+     
+     //   let postUrl = "create_order";
+       // {% if order.pk >  0 %}
+      //      postUrl = "/create_order/";
+      //  {% else %}
+      //      postUrl = "/update_order/";            
+      //  {% endif %}
+
         $.ajax({
             type: "POST",
             url: "/create_order/",
@@ -485,11 +516,12 @@
 
                     alert("Order has Added");
                     window.location="/";
-
                 }
             }
         })
+        
     }
+    
     function onclick_delete_row(row_id){
         $('#product_tr_' + row_id).remove();
         reset_index();
@@ -512,6 +544,9 @@
                     alert('Error Occured');
                 }
                 else{
+                     var selectedValue = jQuery( "#id_customer option:selected" ).text();
+                    
+                    jQuery('#company_name2').val(selectedValue);
 
                     jQuery('#id_tel_phone').val((res.customer.telephone ? res.customer.telephone : ''))
                     jQuery('#street').val((res.customer.street ? res.customer.street : ''))
@@ -530,20 +565,15 @@
 
     }
 
-
-    function onProductAdd(){
-     
-    }
-
     function datepickerLoad() {
         jQuery( "#id_date" ).datepicker({dateFormat: "yy-mm-dd"}).datepicker('setDate', new Date());
         
         
     }
+    
     datepickerLoad();
     
     onclick_total_v_row();
-
 
 </script>
 {% endblock %}
