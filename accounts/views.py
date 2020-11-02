@@ -64,7 +64,7 @@ def logoutUser(request):
 @login_required(login_url='login')
 #@admin_only
 def home(request):
-	orders = LeadOrder.objects.all().order_by('-pk')[0:5]
+	orders = LeadOrder.objects.all().order_by('-pk')
 	customers = Customer.objects.all()
 
 	total_customers = customers.count()
