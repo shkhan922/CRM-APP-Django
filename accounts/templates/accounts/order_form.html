@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-3">
                                 <span>LEAD NO</span>
-                                <input type="text" name="lead_no" maxlength="200" class="form-control" required="" id="id_lead_no" value={{ order.order_no }}>
+                                <input type="text" name="lead_no" maxlength="200" class="form-control" required="" id="id_lead_no" value={{ order.lead_no }}>
                             </div>
                             <div class="col-3">
                                 <span>COMPANY NAME</span>
@@ -74,47 +74,47 @@
                                         <option value="{{ item.id}}">{{ item.company_name }}</option>
                                     {% endfor %}
                                 </select>
-                                <input type="hidden" name="company_name2" maxlength="200" class="form-control" id="company_name2">
+                                <input type="hidden" name="company_name2" maxlength="200" class="form-control" id="company_name2" value={{ order.company_name2 }}>
                                 
                             </div>
 
 
                             <div class="col-3">
                                 <span>TELEPHONE</span>
-                                <input type="text" name="tel_phone" maxlength="200" class="form-control" required="" id="id_tel_phone">
+                                <input type="text" name="tel_phone" maxlength="200" class="form-control" required="" id="id_tel_phone" value={{ order.tel_phone }}>
 
                             </div>
                             <div class="col-12">
-                                <span>ADDRESS</span>
+                                <span >ADDRESS</span>
     
                             </div>
                             <div class="col-3">
                                 <span>STREET</span>
-                                <input type="text" name="street" maxlength="200" class="form-control" required="" id="street">
+                                <input type="text" name="street" maxlength="200" class="form-control" required="" id="street" value={{ order.street }}>
                             </div>
                             <div class="col-3">
                                 <span>CITY</span>
-                                <input type="text" name="city" maxlength="200" class="form-control" required="" id="city">
+                                <input type="text" name="city" maxlength="200" class="form-control" required="" id="city" value={{ order.city }}>
                             </div>
                             <div class="col-3">
                                 <span>MUNCIPALITY</span>
-                                <input type="text" name="munciplaity" maxlength="200" class="form-control" required="" id="muncipality">
+                                <input type="text" name="munciplaity" maxlength="200" class="form-control" required="" id="muncipality" value={{ order.muncipality }}>
                             </div>
                             <div class="col-3">
                                 <span>STATE</span>
-                                <input type="text" name="state" maxlength="200" class="form-control" required="" id="state">
+                                <input type="text" name="state" maxlength="200" class="form-control" required="" id="state" value={{ order.state }}>
                             </div>
                             <div class="col-3">
                                 <span>COUNTRY</span>
-                                <input type="text" name="country" maxlength="200" class="form-control" required="" id="country">
+                                <input type="text" name="country" maxlength="200" class="form-control" required="" id="country" value={{ order.country }}>
                             </div>
                             <div class="col-3">
                                 <span>P.O BOX NO.</span>
-                                <input type="text" name="poboxno" maxlength="200" class="form-control" required="" id="poboxno">
+                                <input type="text" name="poboxno" maxlength="200" class="form-control" required="" id="poboxno" value={{ order.poboxno }}>
                             </div>
                             <div class="col-3">
                                 <span>POST OFFICE</span>
-                                <input type="text" name="postoffice" maxlength="200" class="form-control" required="" id="postoffice">
+                                <input type="text" name="postoffice" maxlength="200" class="form-control" required="" id="postoffice" value={{ order.postoffice }}>
                             </div>
                         </div>
                         
