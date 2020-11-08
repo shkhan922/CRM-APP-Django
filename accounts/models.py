@@ -127,9 +127,10 @@ class Deal(models.Model):
 
 	Date = models.DateField(null=True)
 	order_type= models.CharField(max_length=200, null=True)
-	order_no = models.CharField(max_length=200, null=True)
+	lead_no = models.CharField(max_length=200, null=True)
 	deal_no = models.CharField(max_length=200, null=True)
 	company_name = models.CharField(max_length=200, null=True)
+	company_name2 = models.CharField(max_length=200, null=True)
 	tel_phone = models.CharField(max_length=200, null=True)
 	street = models.CharField(max_length=200, null=True)
 	city = models.CharField(max_length=200, null=True)

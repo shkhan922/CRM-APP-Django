@@ -48,7 +48,7 @@
 						<td>{{order.company_name2}}</td>
 						<td>{{order.date_created}}</td>
 						<td>{{order.sub_total}}</td>
-						<td><a class="btn btn-sm btn-warning" href="{% url 'update_order' order.id %}">Update</a></td>
+						<td><a class="btn btn-sm btn-warning" href="{% url 'updateOrder' order.id %}">Update</a></td>
 						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Cancel</a></td>
 					</tr>
 				{% endfor %}

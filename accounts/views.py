@@ -113,7 +113,7 @@ def accountSettings(request):
 
 
 @login_required(login_url='login')
-#@allowed_users(allowed_roles=['admin'])
+#@allowed_users(allowed_roles=['admin_only'])
 def products(request):
 	products = Product.objects.all()
 
@@ -136,7 +136,7 @@ def orders(request):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin'])
+@admin_only
 def create_customer(request):	
 	form = CustomerForm()
 	if request.method == 'POST':
@@ -231,10 +231,10 @@ def create_order(request):
 				
 				if len(query)>0:
 					last_id= query[0].pk+1
-					order_no= 'LO_'+str(last_id)
+					lead_no= 'LO_'+str(last_id)
 				else:
 					order_no= 'LO_1'
-				obj.order_no = order_no
+				obj.lead_no = lead_no
 				obj.save()
 				context = {
 					'error': False
@@ -303,14 +303,14 @@ def createOrder(request, pk):
 '''
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])
-def updateOrder(request, pk):
+def updateOrder(request,pk):
 	order = LeadOrder.objects.get(id=pk)
 	form = OrderForm(instance=order)
 
 	# print('tst', order.order_no)
 
 	#print(form)
-	print('ORDER form:', form)
+	#print('ORDER form:', form)
 	if request.method == 'POST':
 
 		form = OrderForm(request.POST, instance=order)
@@ -349,7 +349,7 @@ def updateOrder(request, pk):
 		'order': order
 	}
 
-	return render(request, 'accounts/order_form.html', context)
+	return render(request, 'accounts/order_form_update.html', context)
 
 @login_required(login_url='login')
 #@allowed_users(allowed_roles=['admin'])

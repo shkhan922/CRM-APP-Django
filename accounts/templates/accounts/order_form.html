@@ -430,7 +430,7 @@
         }
         $("#totalv").text(totalv.toFixed(2));
 
-        $("#vat").val((totalv*0.05).toFixed(2));        
+        //$("#vat").val((totalv*0.05).toFixed(2));        
 
         var vat = $("#vat").val();
         $("#vat_value").val(((totalv * vat/100)).toFixed(2));
@@ -496,12 +496,12 @@
         };
 
      
-     //   let postUrl = "create_order";
-       // {% if order.pk >  0 %}
-      //      postUrl = "/create_order/";
-      //  {% else %}
-      //      postUrl = "/update_order/";            
-      //  {% endif %}
+        let postUrl = "/create_order/";
+        {% if order.pk > 0 %}
+            postUrl = "/create_order/";
+        {% else %}
+            postUrl = "/updateOrder/";            
+        {% endif %}
 
         $.ajax({
             type: "POST",
